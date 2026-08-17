@@ -1,0 +1,649 @@
+[
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Funcionario",
+    "permissions": [
+      [
+        "add_brand",
+        "catalog",
+        "brand"
+      ],
+      [
+        "change_brand",
+        "catalog",
+        "brand"
+      ],
+      [
+        "delete_brand",
+        "catalog",
+        "brand"
+      ],
+      [
+        "view_brand",
+        "catalog",
+        "brand"
+      ],
+      [
+        "add_category",
+        "catalog",
+        "category"
+      ],
+      [
+        "change_category",
+        "catalog",
+        "category"
+      ],
+      [
+        "delete_category",
+        "catalog",
+        "category"
+      ],
+      [
+        "view_category",
+        "catalog",
+        "category"
+      ],
+      [
+        "add_product",
+        "catalog",
+        "product"
+      ],
+      [
+        "change_product",
+        "catalog",
+        "product"
+      ],
+      [
+        "delete_product",
+        "catalog",
+        "product"
+      ],
+      [
+        "view_product",
+        "catalog",
+        "product"
+      ],
+      [
+        "add_productimage",
+        "catalog",
+        "productimage"
+      ],
+      [
+        "change_productimage",
+        "catalog",
+        "productimage"
+      ],
+      [
+        "delete_productimage",
+        "catalog",
+        "productimage"
+      ],
+      [
+        "view_productimage",
+        "catalog",
+        "productimage"
+      ]
+    ]
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 1,
+  "fields": {
+    "name": "Vestidos",
+    "slug": "vestidos",
+    "active": true
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 2,
+  "fields": {
+    "name": "Blazers",
+    "slug": "blazers",
+    "active": true
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 3,
+  "fields": {
+    "name": "Conjuntos",
+    "slug": "conjuntos",
+    "active": true
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 4,
+  "fields": {
+    "name": "Blusas",
+    "slug": "blusas",
+    "active": true
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 5,
+  "fields": {
+    "name": "Saias",
+    "slug": "saias",
+    "active": true
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 6,
+  "fields": {
+    "name": "Calças",
+    "slug": "calcas",
+    "active": true
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 7,
+  "fields": {
+    "name": "Casacos",
+    "slug": "casacos",
+    "active": true
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 8,
+  "fields": {
+    "name": "Short",
+    "slug": "short",
+    "active": true
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 1,
+  "fields": {
+    "name": "LANÇA PERFUME EASY",
+    "slug": "lanca-perfume-easy",
+    "logo": "",
+    "active": true
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 2,
+  "fields": {
+    "name": "MY FAVORITE THINGS (MYFT)",
+    "slug": "my-favorite-things-myft",
+    "logo": "",
+    "active": true
+  }
+},
+{
+  "model": "catalog.brand",
+  "pk": 3,
+  "fields": {
+    "name": "CHARRY",
+    "slug": "charry",
+    "logo": "brands/charry___industria_e_comercio_de_confeccoes_logo.jpg",
+    "active": true
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 1,
+  "fields": {
+    "name": "Vestido Midi",
+    "slug": "vestido-midi",
+    "brand": 1,
+    "category": 1,
+    "price": "479.00",
+    "promotional_price": "279.00",
+    "max_installments": 1,
+    "short_description": "Vestido Super Midi Estampado Ombro Único",
+    "full_description": "Confeccionado em malha pesada, o vestido super midi combina manga longa, caimento justo ao corpo e modelagem de um ombro único. A estampa exuberante é o destaque, adicionando vivacidade e personalidade às composições da temporada. Invista!",
+    "available_sizes": "P, M, G",
+    "main_image": "products/32d4eb8fb64743b292edb24e838091a5.png",
+    "is_featured": true,
+    "is_new": true,
+    "is_bestseller": false,
+    "active": true,
+    "meta_title": "",
+    "meta_description": "",
+    "created_at": "2026-07-22T04:56:25.560Z",
+    "updated_at": "2026-07-23T21:20:36.289Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 16,
+  "fields": {
+    "name": "Vestido Super Midi Manga Longa De Tule",
+    "slug": "vestido-super-midi-manga-longa-de-tule",
+    "brand": 1,
+    "category": 1,
+    "price": "176.50",
+    "promotional_price": null,
+    "max_installments": 1,
+    "short_description": "Super midi",
+    "full_description": "O vestido super midi lança perfume easy® é confeccionado em malha tule, trazendo a transparência como elemento sofisticado e atual. Apresenta caimento justo ao corpo, decote canoa e mangas longas. finalize com salto para uma produção noturna impecável!",
+    "available_sizes": "P, M, G",
+    "main_image": "products/a96c4c0aca184d368e7a3ff10c813f2e.png",
+    "is_featured": true,
+    "is_new": false,
+    "is_bestseller": true,
+    "active": true,
+    "meta_title": "",
+    "meta_description": "",
+    "created_at": "2026-07-23T21:22:51.300Z",
+    "updated_at": "2026-07-23T21:22:51.300Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 18,
+  "fields": {
+    "name": "Blusa Decote Bobo Lisa Com Mangas Longas",
+    "slug": "blusa-decote-bobo-lisa-com-mangas-longas",
+    "brand": 3,
+    "category": 4,
+    "price": "104.91",
+    "promotional_price": null,
+    "max_installments": 2,
+    "short_description": "Blusa decote bobo lisa com mangas longas",
+    "full_description": "Blusa decote bobo lisa com mangas longas: esta blusa lisa apresenta um decote bobo com pregas nos ombros, criando um volume elegante que se estende ao decote. o acabamento do decote frente é feito com uma dobra refinada, enquanto o viés interno e o pesponto aparente garantem um acabamento impecável no decote costas. as mangas longas e a barra são finalizadas em bainha, proporcionando um ajuste sofisticado e bem acabado. ideal para um visual clássico com um toque de modernidade.",
+    "available_sizes": "P, M, G",
+    "main_image": "products/a6ee1e94ce0b4f73ad5ef63fa273fc56.jpg",
+    "is_featured": false,
+    "is_new": false,
+    "is_bestseller": false,
+    "active": true,
+    "meta_title": "",
+    "meta_description": "",
+    "created_at": "2026-07-28T17:34:07.520Z",
+    "updated_at": "2026-07-28T17:34:07.520Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 19,
+  "fields": {
+    "name": "Calça Super Skinny Lisa",
+    "slug": "calca-super-skinny-lisa",
+    "brand": 3,
+    "category": 6,
+    "price": "127.30",
+    "promotional_price": null,
+    "max_installments": 2,
+    "short_description": "Calça super skinny lisa",
+    "full_description": "Calça super skinny lisa: esta calça super skinny lisa é projetada com cintura de elástico interno para ótima sustentação. apresenta recortes e pespontos ao longo do comprimento das pernas, adicionando um toque de estilo. o traseiro é detalhado com pences para um ajuste perfeito. a barra é finalizada em bainha, completando a peça com um acabamento moderno e sofisticado. ideal para um look ajustado e contemporâneo.",
+    "available_sizes": "36, 38",
+    "main_image": "products/9f5491cc250a4d3aa70882d834183629.jpg",
+    "is_featured": true,
+    "is_new": true,
+    "is_bestseller": false,
+    "active": true,
+    "meta_title": "",
+    "meta_description": "",
+    "created_at": "2026-07-28T17:35:20.172Z",
+    "updated_at": "2026-07-28T17:35:20.172Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 20,
+  "fields": {
+    "name": "Vestido Curto Liso Com Passante",
+    "slug": "vestido-curto-liso-com-passante",
+    "brand": 3,
+    "category": 1,
+    "price": "166.50",
+    "promotional_price": "149.00",
+    "max_installments": 1,
+    "short_description": "Vestido curto liso",
+    "full_description": "Este vestido curto liso com passante, é perfeito para um look sofisticado e moderno. apresenta viés aplicado nas cavas e decote, com pesponto aparente para um acabamento impecável. o corpo frente conta com recorte e abertura, com um passante embutido no centro, garantindo um ajuste justo ao corpo em tecido de toque agradável. acabamento da barra em bainha.",
+    "available_sizes": "P",
+    "main_image": "products/48a9a64853df49b78bdc2a3c14935cbf.jpg",
+    "is_featured": true,
+    "is_new": false,
+    "is_bestseller": true,
+    "active": true,
+    "meta_title": "",
+    "meta_description": "",
+    "created_at": "2026-07-28T17:37:17.541Z",
+    "updated_at": "2026-07-28T17:37:17.541Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 21,
+  "fields": {
+    "name": "Blusa Corset Com Zíper",
+    "slug": "blusa-corset-com-ziper",
+    "brand": 2,
+    "category": 4,
+    "price": "129.20",
+    "promotional_price": null,
+    "max_installments": 1,
+    "short_description": "Superfície 100% poliuretano; base e forro 100% poliéster",
+    "full_description": "A blusa corset de pu é a aposta certa para a temporada. Com design sem alças e caimento justo, valoriza a silhueta com um toque marcante. O zíper frontal adiciona customização e praticidade.",
+    "available_sizes": "P, M, G",
+    "main_image": "products/86524b4fec234192b38d85c075721cb0.jpg",
+    "is_featured": false,
+    "is_new": false,
+    "is_bestseller": false,
+    "active": true,
+    "meta_title": "",
+    "meta_description": "",
+    "created_at": "2026-07-28T17:40:39.385Z",
+    "updated_at": "2026-07-28T17:40:39.385Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 22,
+  "fields": {
+    "name": "Calça Jeans Ballon Curve Cintura Média",
+    "slug": "calca-jeans-ballon-curve-cintura-media",
+    "brand": 2,
+    "category": 6,
+    "price": "553.00",
+    "promotional_price": "479.00",
+    "max_installments": 3,
+    "short_description": "calça jeans",
+    "full_description": "Volume que rouba a cena. A calça jeans traz modelagem balloon oversized, com pernas amplas e formato\r\narredondado que entrega informação de moda imediata. A cintura média com cós estruturado e\r\nfechamento tradicional garante equilíbrio ao visual, enquanto os bolsos funcionais reforçam a\r\nproposta urbana. Ideal para produções atuais e cheias de atitude.",
+    "available_sizes": "36, 38",
+    "main_image": "products/63f46d7777674985a3cffd7d8a7ff493.jpg",
+    "is_featured": false,
+    "is_new": false,
+    "is_bestseller": false,
+    "active": true,
+    "meta_title": "",
+    "meta_description": "",
+    "created_at": "2026-07-28T17:43:44.165Z",
+    "updated_at": "2026-07-28T17:44:01.963Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 23,
+  "fields": {
+    "name": "Vestido Curto De Alças",
+    "slug": "vestido-curto-de-alcas",
+    "brand": 1,
+    "category": 1,
+    "price": "141.20",
+    "promotional_price": null,
+    "max_installments": 1,
+    "short_description": "vestido curto de alças finas",
+    "full_description": "vestido curto de alças finas com visual leve e feminino. O modelo possui detalhe franzido no busto, modelagem evasê que proporciona movimento e amarração nas costas que valoriza a silhueta. Conta com fechamento por zíper para melhor ajuste ao corpo.",
+    "available_sizes": "P, M, G",
+    "main_image": "products/4cc5e02d9d9b4dab8a2427cb4a140e16.jpg",
+    "is_featured": false,
+    "is_new": false,
+    "is_bestseller": false,
+    "active": true,
+    "meta_title": "",
+    "meta_description": "",
+    "created_at": "2026-07-28T22:24:11.333Z",
+    "updated_at": "2026-07-28T22:24:11.333Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 24,
+  "fields": {
+    "name": "Short Jeans Mom Barra Desfiada",
+    "slug": "short-jeans-mom-barra-desfiada",
+    "brand": 1,
+    "category": 8,
+    "price": "183.50",
+    "promotional_price": null,
+    "max_installments": 1,
+    "short_description": "Short LP",
+    "full_description": "O short confeccionado em jeans sem elasticidade aposta na modelagem mom e na cintura média para atualizar o look. Conta com bolsos funcionais e barras desfiadas que criam uma proposta casual e fácil de combinar em diferentes ocasiões. Invista agora!",
+    "available_sizes": "38",
+    "main_image": "products/3dbe0fed6c3145bb9416c82f86ee1f9d.webp",
+    "is_featured": false,
+    "is_new": false,
+    "is_bestseller": false,
+    "active": true,
+    "meta_title": "",
+    "meta_description": "",
+    "created_at": "2026-07-28T22:26:22.928Z",
+    "updated_at": "2026-07-29T00:20:34.580Z"
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 3,
+  "fields": {
+    "product": 1,
+    "image": "products/16db293de3f3479087078c4faffb6523.png",
+    "order": 0,
+    "alt_text": ""
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 4,
+  "fields": {
+    "product": 1,
+    "image": "products/f07bae96bcc14f6cbcfe4f331d443f50.png",
+    "order": 0,
+    "alt_text": ""
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 5,
+  "fields": {
+    "product": 16,
+    "image": "products/6605eb2d925e43d09b767276479e0a39.png",
+    "order": 0,
+    "alt_text": ""
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 6,
+  "fields": {
+    "product": 16,
+    "image": "products/febac665e4874e9f9bf23235d6429208.png",
+    "order": 0,
+    "alt_text": ""
+  }
+},
+{
+  "model": "catalog.productimage",
+  "pk": 7,
+  "fields": {
+    "product": 22,
+    "image": "products/d08c4dba569947a78203b1b7707fe1a4.jpg",
+    "order": 0,
+    "alt_text": ""
+  }
+},
+{
+  "model": "core.storeinfo",
+  "pk": 1,
+  "fields": {
+    "name": "Sandra Ellen Modas",
+    "tagline": "Moda feminina premium em Araci — elegância, exclusividade e curadoria em cada peça.",
+    "about_text": "",
+    "address": "Avenida Sete de Setembro, 28, Centro",
+    "city": "Araci - BA",
+    "zip_code": "48760-000",
+    "phone": "(75) 99113-5369",
+    "whatsapp_number": "75991135369",
+    "whatsapp_default_message": "Olá, gostaria de mais informações.",
+    "instagram_url": "https://www.instagram.com/sandraellenmodas/",
+    "facebook_url": "",
+    "google_maps_embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3911.959595527031!2d-38.9633105!3d-11.3376619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x713c86d96da076b%3A0x64d524e1d582eefc!2sAv.%207%20de%20Setembro%2C%2028%2C%20Araci%20-%20BA%2C%2048760-000!5e0!3m2!1spt-BR!2sbr!4v1784695279132!5m2!1spt-BR!2sbr",
+    "meta_description": "",
+    "og_image": "",
+    "google_analytics_id": "",
+    "meta_pixel_id": "",
+    "topbar_enabled": true,
+    "topbar_text": "Enviamos para todo o Brasil"
+  }
+},
+{
+  "model": "core.storehour",
+  "pk": 1,
+  "fields": {
+    "weekday": 0,
+    "opens_at": "09:00:00",
+    "closes_at": "18:00:00",
+    "closed": false
+  }
+},
+{
+  "model": "core.storehour",
+  "pk": 2,
+  "fields": {
+    "weekday": 1,
+    "opens_at": "09:00:00",
+    "closes_at": "18:00:00",
+    "closed": false
+  }
+},
+{
+  "model": "core.storehour",
+  "pk": 3,
+  "fields": {
+    "weekday": 2,
+    "opens_at": "09:00:00",
+    "closes_at": "18:00:00",
+    "closed": false
+  }
+},
+{
+  "model": "core.storehour",
+  "pk": 4,
+  "fields": {
+    "weekday": 3,
+    "opens_at": "09:00:00",
+    "closes_at": "18:00:00",
+    "closed": false
+  }
+},
+{
+  "model": "core.storehour",
+  "pk": 5,
+  "fields": {
+    "weekday": 4,
+    "opens_at": "09:00:00",
+    "closes_at": "18:00:00",
+    "closed": false
+  }
+},
+{
+  "model": "core.storehour",
+  "pk": 6,
+  "fields": {
+    "weekday": 5,
+    "opens_at": "09:00:00",
+    "closes_at": "12:00:00",
+    "closed": false
+  }
+},
+{
+  "model": "core.storehour",
+  "pk": 7,
+  "fields": {
+    "weekday": 6,
+    "opens_at": null,
+    "closes_at": null,
+    "closed": true
+  }
+},
+{
+  "model": "core.paymentmethod",
+  "pk": 1,
+  "fields": {
+    "name": "Visa",
+    "active": true,
+    "order": 0
+  }
+},
+{
+  "model": "core.paymentmethod",
+  "pk": 2,
+  "fields": {
+    "name": "Mastercard",
+    "active": true,
+    "order": 1
+  }
+},
+{
+  "model": "core.paymentmethod",
+  "pk": 3,
+  "fields": {
+    "name": "Elo",
+    "active": true,
+    "order": 2
+  }
+},
+{
+  "model": "core.paymentmethod",
+  "pk": 4,
+  "fields": {
+    "name": "Hipercard",
+    "active": true,
+    "order": 3
+  }
+},
+{
+  "model": "core.paymentmethod",
+  "pk": 5,
+  "fields": {
+    "name": "Diners",
+    "active": true,
+    "order": 4
+  }
+},
+{
+  "model": "core.paymentmethod",
+  "pk": 6,
+  "fields": {
+    "name": "Pix",
+    "active": true,
+    "order": 0
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$azRCQzZWZDlwdXNTVTkydjF1cE5VcA$1PkLC8Jcl8NgWUjxPEp9bm1MZXmDJSvJLApH0FfBy8k",
+    "last_login": "2026-08-03T14:44:49.424Z",
+    "is_superuser": true,
+    "username": "pedro",
+    "first_name": "",
+    "last_name": "",
+    "email": "pedromota07@hotmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-07-22T03:52:50.548Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$QWlHcUt1M0NLWjVpdHVhcU9qTmZvWQ$NVckFcMtwoQ6CLVte6MD7kokNDFOk+bnXbW30kP4q34",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "ellen",
+    "first_name": "",
+    "last_name": "",
+    "email": "ellenlima@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-07-27T16:01:45.578Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

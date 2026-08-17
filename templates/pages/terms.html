@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="legal-page wrap">
+  <div class="breadcrumbs"><a href="{% url 'home' %}">Início</a><span>/</span>Termos de Uso</div>
+  <h1>Termos de Uso</h1>
+  <p>Ao acessar o catálogo digital da {{ store.name }}, você concorda com os termos abaixo.</p>
+
+  <h2>1. Natureza do site</h2>
+  <p>Este é um catálogo digital para apresentação de produtos. Não há venda ou pagamento online: todo o
+  atendimento e fechamento de compra acontece diretamente pelo WhatsApp ou na loja física.</p>
+
+  <h2>2. Disponibilidade e preços</h2>
+  <p>Preços e disponibilidade das peças exibidas podem mudar sem aviso prévio e serão sempre confirmados no
+  atendimento via WhatsApp antes de qualquer compra.</p>
+
+  <h2>3. Propriedade intelectual</h2>
+  <p>Todo o conteúdo (textos, imagens, identidade visual) pertence à {{ store.name }} e não pode ser
+  reproduzido sem autorização.</p>
+
+  <h2>4. Uso adequado</h2>
+  <p>É proibido utilizar este site para fins ilícitos ou que possam prejudicar seu funcionamento.</p>
+
+  <h2>5. Alterações</h2>
+  <p>Estes termos podem ser atualizados a qualquer momento; a versão vigente é sempre a publicada nesta página.</p>
+</section>
+{% endblock %}

@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load static catalog_extras %}
+
+{% block content %}
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="hero-ring"></div>
+  <div class="hero-ring r2"></div>
+  <div class="hero-content">
+    <div class="eyebrow" style="justify-content:center;margin-bottom:20px;"><span class="spark"><svg viewBox="0 0 24 24"><path d="M12 0 L14 10 L24 12 L14 14 L12 24 L10 14 L0 12 L10 10 Z"/></svg></span> Boutique Premium · {{ store.city|default:"Araci, BA" }}</div>
+    <div class="hero-mark">
+      <img src="{% static 'img/logo.jpg' %}" alt="{{ store.name }}" width="100" height="100" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+    </div>
+    <h1>Elegância em <em>cada</em> detalhe.</h1>
+    <p class="sub">{{ store.tagline|default:"As melhores marcas da moda feminina em Araci." }}</p>
+    <div class="hero-actions">
+      <a href="{% url 'catalog:catalog_list' %}" class="btn btn-gold">Ver Coleção</a>
+      <a href="{% whatsapp_link %}" target="_blank" rel="noopener" class="btn btn-ghost">Falar no WhatsApp</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><div class="line"></div></div>
+</section>
+
+<!-- ============ MARCAS ============ -->
+<section id="marcas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Curadoria</div>
+      <h2>Nossas Marcas</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="marcas-grid reveal">
+      {% for brand in brands %}
+      <div class="marca-card"><span>{{ brand.name }}</span></div>
+      {% empty %}
+      <div class="marca-card"><span>Cadastre marcas no painel</span></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATÁLOGO (destaques) ============ -->
+<section class="catalogo" id="catalogo">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Coleção</div>
+      <h2>Destaques do Catálogo</h2>
+      <p>Toque em uma peça para conversar diretamente com a loja pelo WhatsApp.</p>
+      <div class="divider"></div>
+    </div>
+
+    {% if featured_products %}
+    <div class="cat-controls reveal">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="searchInput" type="text" placeholder="Pesquisar peça...">
+      </div>
+      <div class="filters" id="brandFilters">
+        <div class="chip active" data-val="Todas">Todas</div>
+        {% for b in catalog_brands %}
+        <div class="chip" data-val="{{ b.name }}">{{ b.name }}</div>
+        {% endfor %}
+      </div>
+    </div>
+    {% if catalog_categories %}
+    <div class="filters reveal" id="catFilters" style="margin-bottom:36px;">
+      <div class="chip active" data-val="Todas">Todas</div>
+      {% for c in catalog_categories %}
+      <div class="chip" data-val="{{ c.name }}">{{ c.name }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endif %}
+
+    <div class="product-grid reveal" id="productGrid">
+      {% for product in featured_products %}
+      <div class="product-card" data-brand="{{ product.brand.name }}" data-category="{{ product.category.name }}" data-name="{{ product.name|lower }} {{ product.brand.name|lower }}">
+        {% include "catalog/_product_media.html" with product=product %}
+        <div class="product-info">
+          <div class="brand">{{ product.brand.name }}</div>
+          <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
+          <div class="desc">{{ product.short_description }}</div>
+          <div class="row">
+            {% if product.is_on_promotion %}
+            <div class="price price-promo">
+              <span class="price-old">{{ product.price|brl }}</span>
+              <span class="price-new">{{ product.promotional_price|brl }}</span>
+            </div>
+            {% else %}
+            <div class="price">{{ product.price|brl }}</div>
+            {% endif %}
+            <a class="interest-btn" href="{% whatsapp_link product.name product=product %}" target="_blank" rel="noopener">Tenho Interesse</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="empty-state">Nenhum produto cadastrado ainda.</div>
+      {% endfor %}
+    </div>
+    <div class="empty-state" id="catalogEmptyState" style="display:none;">Nenhuma peça encontrada para essa busca.</div>
+    <div style="text-align:center;margin-top:50px;">
+      <a href="{% url 'catalog:catalog_list' %}" class="btn btn-ghost">Ver Catálogo Completo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTATO ============ -->
+<section id="contato">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Visite-nos</div>
+      <h2>Contato</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="contato-grid">
+      <div class="reveal">
+        <div class="info-block">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.79.63 2.65a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.43-1.2a2 2 0 0 1 2.11-.45c.86.3 1.75.51 2.65.63A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><h4>Telefone</h4><p>{{ store.phone }}</p></div>
+        </div>
+        <div class="info-block">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+          <div><h4>WhatsApp</h4><p><a href="{% whatsapp_link %}" target="_blank" rel="noopener">{{ store.phone }}</a></p></div>
+        </div>
+        <div class="info-block">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><h4>Endereço</h4><p>{{ store.address }}<br>{{ store.city }}, {{ store.zip_code }}</p></div>
+        </div>
+        <div class="info-block" style="border-bottom:none;">
+          <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <h4>Horário de Funcionamento</h4>
+            <table class="hours-table">
+              {% for h in grouped_hours %}
+              <tr><td>{{ h.label }}</td><td>{{ h.text }}</td></tr>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="map-wrap reveal">
+        {% if store.google_maps_embed_url %}
+        <iframe
+          src="{{ store.google_maps_embed_url }}"
+          width="100%" height="100%" style="border:0;"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+        {% else %}
+        <div class="empty-state">Mapa não configurado. Adicione a URL em Admin &gt; Informações da loja.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load catalog_extras %}
+{% block content %}
+<section class="legal-page wrap">
+  <div class="breadcrumbs"><a href="{% url 'home' %}">Início</a><span>/</span>Política de Privacidade</div>
+  <h1>Política de Privacidade</h1>
+  <p>Esta política descreve como a {{ store.name }} coleta, usa e protege as informações dos visitantes do nosso
+  catálogo digital, em conformidade com a Lei Geral de Proteção de Dados (Lei 13.709/2018 — LGPD).</p>
+
+  <h2>1. Quais dados coletamos</h2>
+  <ul>
+    <li>Dados de navegação (páginas visitadas, dispositivo, origem do acesso), via cookies de análise.</li>
+    <li>Informações que você opte por compartilhar diretamente conosco pelo WhatsApp.</li>
+  </ul>
+
+  <h2>2. Finalidade</h2>
+  <p>Usamos esses dados para entender como o catálogo é utilizado, melhorar a experiência de navegação e,
+  quando autorizado, para ações de marketing (Google Analytics e Meta Pixel).</p>
+
+  <h2>3. Compartilhamento</h2>
+  <p>Não vendemos nem compartilhamos seus dados pessoais com terceiros, exceto com provedores de análise
+  (Google, Meta) estritamente quando você consente no banner de cookies.</p>
+
+  <h2>4. Seus direitos</h2>
+  <p>Você pode solicitar acesso, correção ou exclusão dos seus dados a qualquer momento entrando em contato
+  pelo WhatsApp <a href="{% whatsapp_link %}" target="_blank" rel="noopener">{{ store.phone }}</a>.</p>
+
+  <h2>5. Cookies</h2>
+  <p>Veja detalhes específicos na nossa <a href="{% url 'pages:cookies' %}">Política de Cookies</a>.</p>
+
+  <h2>6. Contato</h2>
+  <p>{{ store.name }} — {{ store.address }}, {{ store.city }}, {{ store.zip_code }}.</p>
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "admin/index.html" %}
+
+{% block content %}
+<div class="metrics-entry-card">
+  <a href="{% url 'admin:metrics_dashboard' %}" class="metrics-entry-link">
+    <span class="metrics-entry-icon" aria-hidden="true">&#9776;</span>
+    <span class="metrics-entry-text">
+      <strong>Métricas</strong>
+      <small>Ranking dos produtos mais acessados e cliques no WhatsApp</small>
+    </span>
+    <span class="metrics-entry-arrow" aria-hidden="true">&rsaquo;</span>
+  </a>
+</div>
+{{ block.super }}
+{% endblock %}

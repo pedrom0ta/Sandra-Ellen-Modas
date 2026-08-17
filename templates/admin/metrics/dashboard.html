@@ -1,0 +1,128 @@
+{% extends "admin/base_site.html" %}
+{% load humanize catalog_extras %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">Início</a>
+  &rsaquo; Métricas
+</div>
+{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block content %}
+<div class="mx-page">
+
+  <!-- ================= CABEÇALHO ================= -->
+  <div class="mx-header">
+    <div class="mx-header-text">
+      <h1>Métricas</h1>
+      <p class="mx-header-updated">
+        {% if period_days == 1 %}
+          Hoje, {{ period_end|date:"d/m/Y" }}
+        {% else %}
+          {{ period_start|date:"d/m/Y" }} — {{ period_end|date:"d/m/Y" }}
+        {% endif %}
+      </p>
+    </div>
+    <div class="mx-period" role="group" aria-label="Filtro de período">
+      {% for choice in period_choices %}
+        <a href="?days={{ choice.days }}"
+           class="mx-period-btn{% if period_days == choice.days %} mx-period-btn-active{% endif %}">
+          {{ choice.label }}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- ================= DESTAQUE: PRODUTO MAIS ACESSADO ================= -->
+  {% if top_product %}
+  <a class="mx-hero-featured" href="{% url 'admin:catalog_product_change' top_product.product_id %}">
+    <span class="mx-hero-photo-wrap">
+      {% if top_product.image_url %}
+        <img class="mx-hero-photo" src="{{ top_product.image_url }}" alt="{{ top_product.name }}">
+      {% else %}
+        <span class="mx-hero-photo mx-hero-photo-placeholder" style="background: linear-gradient(150deg, hsl({{ top_product.product_id|placeholder_hue }} 18% 16%), #0a0a0a 75%);">
+          {{ top_product.name|initials }}
+        </span>
+      {% endif %}
+      <span class="mx-hero-trophy" aria-hidden="true">🏆</span>
+    </span>
+    <div class="mx-hero-body">
+      <span class="mx-hero-label">Produto mais acessado</span>
+      <span class="mx-hero-name">{{ top_product.name }}</span>
+      <div class="mx-hero-metrics">
+        <span class="mx-hero-metric"><strong>{{ top_product.views|intcomma }}</strong> acesso{{ top_product.views|pluralize }}</span>
+        <span class="mx-hero-metric"><strong>{{ top_product.clicks|intcomma }}</strong> clique{{ top_product.clicks|pluralize }} no WhatsApp</span>
+      </div>
+    </div>
+  </a>
+  {% else %}
+  <div class="mx-hero-featured mx-hero-featured-empty">
+    <span class="mx-hero-trophy" aria-hidden="true">🏆</span>
+    <div class="mx-hero-body">
+      <span class="mx-hero-label">Produto mais acessado</span>
+      <span class="mx-hero-empty">Ainda não há acessos registrados neste período.</span>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ================= CONTADORES GERAIS ================= -->
+  <div class="mx-totals">
+    <div class="mx-total">
+      <span class="mx-total-value">{{ total_product_views|intcomma }}</span>
+      <span class="mx-total-label">Total de acessos aos produtos</span>
+    </div>
+    <div class="mx-total">
+      <span class="mx-total-value">{{ total_whatsapp_clicks|intcomma }}</span>
+      <span class="mx-total-label">Total de cliques no WhatsApp</span>
+    </div>
+  </div>
+
+  <!-- ================= RANKING DE PRODUTOS ================= -->
+  <div class="mx-table-section">
+    <h2 class="mx-section-title">Produtos mais acessados</h2>
+
+    {% if not top_products %}
+      <p class="mx-empty">Ainda não há acessos a produtos registrados neste período.</p>
+    {% else %}
+    <div class="mx-ranking">
+      {% for item in top_products %}
+      <a class="mx-rank-row mx-rank-row-{{ item.rank }}{% if item.rank <= 3 %} mx-rank-row-top{% endif %}"
+         href="{% url 'admin:catalog_product_change' item.product_id %}">
+
+        <span class="mx-rank-badge mx-rank-badge-{{ item.rank }}">
+          {% if item.rank == 1 %}🥇{% elif item.rank == 2 %}🥈{% elif item.rank == 3 %}🥉{% else %}{{ item.rank }}{% endif %}
+        </span>
+
+        {% if item.image_url %}
+          <img class="mx-rank-photo" src="{{ item.image_url }}" alt="{{ item.product__name }}" loading="lazy">
+        {% else %}
+          <span class="mx-rank-photo mx-rank-photo-placeholder" style="background: linear-gradient(150deg, hsl({{ item.product_id|placeholder_hue }} 18% 16%), #0a0a0a 75%);">
+            {{ item.product__name|initials }}
+          </span>
+        {% endif %}
+
+        <span class="mx-rank-info">
+          <span class="mx-rank-name">{{ item.product__name }}</span>
+          <span class="mx-rank-bar"><span class="mx-rank-bar-fill" style="width: {{ item.bar_pct }}%;"></span></span>
+        </span>
+
+        <span class="mx-rank-numbers">
+          <span class="mx-rank-number">
+            <strong>{{ item.views|intcomma }}</strong>
+            <small>acesso{{ item.views|pluralize }}</small>
+          </span>
+          <span class="mx-rank-number mx-rank-number-whatsapp">
+            <strong>{{ item.clicks|intcomma }}</strong>
+            <small>WhatsApp</small>
+          </span>
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% load catalog_extras %}
+{% for product in page_obj %}
+<div class="product-card">
+  {% include "catalog/_product_media.html" with product=product %}
+  <div class="product-info">
+    <div class="brand">{{ product.brand.name }}</div>
+    <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
+    <div class="desc">{{ product.short_description }}</div>
+    <div class="row">
+      {% if product.is_on_promotion %}
+      <div class="price price-promo">
+        <span class="price-old">{{ product.price|brl }}</span>
+        <span class="price-new">{{ product.promotional_price|brl }}</span>
+      </div>
+      {% else %}
+      <div class="price">{{ product.price|brl }}</div>
+      {% endif %}
+      <a class="interest-btn" href="{% whatsapp_link product.name product=product %}" target="_blank" rel="noopener">Tenho Interesse</a>
+    </div>
+    {% if product.has_installments %}
+    <div class="card-installments">Em até {{ product.max_installments }}x {{ product.installment_value|brl }} sem juros</div>
+    {% endif %}
+  </div>
+</div>
+{% empty %}
+<div class="empty-state">Nenhuma peça encontrada para essa busca.</div>
+{% endfor %}

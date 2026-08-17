@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load catalog_extras %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">Coleção</div>
+    <h1>Catálogo Completo</h1>
+    <div class="breadcrumbs"><a href="{% url 'home' %}">Início</a><span>/</span>Catálogo</div>
+  </div>
+</section>
+
+<section class="catalogo">
+  <div class="wrap">
+    <form method="get" class="cat-controls reveal in">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" name="q" value="{{ current_query }}" placeholder="Pesquisar peça...">
+      </div>
+      <div class="filters">
+        <input type="hidden" name="marca" value="{{ current_brand }}">
+        <input type="hidden" name="categoria" value="{{ current_category }}">
+        {% if current_promo %}<input type="hidden" name="promo" value="1">{% endif %}
+        <select name="ordenar" onchange="this.form.submit()" style="background:var(--black-deep);color:var(--gray-light);border:1px solid rgba(236,236,236,.2);padding:9px 14px;border-radius:20px;font-size:11px;text-transform:uppercase;">
+          {% for key, opt in order_options.items %}
+          <option value="{{ key }}" {% if key == current_order %}selected{% endif %}>{{ opt.1 }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <noscript><button type="submit" class="btn btn-ghost">Filtrar</button></noscript>
+    </form>
+
+    <div class="filters reveal in" style="margin:20px 0 8px;">
+      {% if current_promo %}
+      <a class="chip chip-promo active" href="?q={{ current_query }}&amp;marca={{ current_brand }}&amp;categoria={{ current_category }}&amp;ordenar={{ current_order }}">🔥 Promoções ✕</a>
+      {% else %}
+      <a class="chip chip-promo" href="?q={{ current_query }}&amp;marca={{ current_brand }}&amp;categoria={{ current_category }}&amp;ordenar={{ current_order }}&amp;promo=1">🔥 Promoções</a>
+      {% endif %}
+    </div>
+
+    <div class="filters reveal in" style="margin:20px 0;">
+      <a class="chip {% if not current_brand %}active{% endif %}" href="?q={{ current_query }}&amp;categoria={{ current_category }}&amp;ordenar={{ current_order }}{% if current_promo %}&amp;promo=1{% endif %}">Todas as marcas</a>
+      {% for b in brands %}
+      <a class="chip {% if current_brand == b.slug %}active{% endif %}" href="?q={{ current_query }}&amp;marca={{ b.slug }}&amp;categoria={{ current_category }}&amp;ordenar={{ current_order }}{% if current_promo %}&amp;promo=1{% endif %}">{{ b.name }}</a>
+      {% endfor %}
+    </div>
+    <div class="filters reveal in" style="margin-bottom:36px;">
+      <a class="chip {% if not current_category %}active{% endif %}" href="?q={{ current_query }}&amp;marca={{ current_brand }}&amp;ordenar={{ current_order }}{% if current_promo %}&amp;promo=1{% endif %}">Todas as categorias</a>
+      {% for c in categories %}
+      <a class="chip {% if current_category == c.slug %}active{% endif %}" href="?q={{ current_query }}&amp;marca={{ current_brand }}&amp;categoria={{ c.slug }}&amp;ordenar={{ current_order }}{% if current_promo %}&amp;promo=1{% endif %}">{{ c.name }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="product-grid" id="product-grid">
+      {% include "catalog/_product_cards.html" %}
+    </div>
+
+    {% if page_obj.has_next %}
+    <div class="load-more-wrap">
+      <button
+        type="button"
+        id="load-more-btn"
+        class="btn btn-gold"
+        data-next-page="{{ page_obj.next_page_number }}"
+        data-base-query="q={{ current_query|urlencode }}&marca={{ current_brand }}&categoria={{ current_category }}&ordenar={{ current_order }}{% if current_promo %}&promo=1{% endif %}"
+      >Carregar mais</button>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('load-more-btn');
+  if (!btn) return;
+  var grid = document.getElementById('product-grid');
+
+  btn.addEventListener('click', function () {
+    var page = btn.dataset.nextPage;
+    var baseQuery = btn.dataset.baseQuery;
+    var url = window.location.pathname + '?' + baseQuery + '&page=' + page + '&partial=1';
+
+    btn.disabled = true;
+    var originalText = btn.textContent;
+    btn.textContent = 'Carregando...';
+
+    fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        grid.insertAdjacentHTML('beforeend', data.html);
+        if (data.has_next) {
+          btn.dataset.nextPage = data.next_page;
+          btn.disabled = false;
+          btn.textContent = originalText;
+        } else {
+          btn.remove();
+        }
+      })
+      .catch(function () {
+        btn.disabled = false;
+        btn.textContent = originalText;
+      });
+  });
+});
+</script>
+{% endblock %}

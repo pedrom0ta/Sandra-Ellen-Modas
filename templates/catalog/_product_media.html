@@ -1,0 +1,27 @@
+{% load catalog_extras %}
+{% comment %}
+Bloco de mídia do card de produto (imagem + placeholder + selos), usado em:
+_product_cards.html, home.html e product_detail.html (relacionados).
+Espera receber a variável `product` via {% include ... with product=produto %}.
+
+Se o produto tiver uma 2ª imagem cadastrada na galeria, ela aparece com uma
+transição suave ao passar o mouse por cima do card (hover) — dá pra ver o
+produto de outro ângulo sem precisar clicar.
+{% endcomment %}
+{% if product.main_image %}
+<a href="{{ product.get_absolute_url }}" class="product-media" style="display:block;">
+  <img src="{{ product.main_image.url }}" alt="{{ product.name }}" loading="lazy" draggable="false" class="media-img media-primary">
+  {% with hover_image=product.gallery.all|first %}
+  {% if hover_image %}
+  <img src="{{ hover_image.image.url }}" alt="{{ product.name }} — outro ângulo" loading="lazy" draggable="false" class="media-img media-secondary">
+  {% endif %}
+  {% endwith %}
+{% else %}
+<a href="{{ product.get_absolute_url }}" class="product-media" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg, hsl({{ product.id|placeholder_hue }} 18% 12%), #0a0a0a 70%);">
+  <span class="monogram">{{ product.name|initials }}</span>
+  <div class="overlay"></div>
+{% endif %}
+  {% if product.is_on_promotion %}
+  <span class="tag-promo">Promoção <span class="pct">-{{ product.discount_percent }}%</span></span>
+  {% elif product.is_new %}<span class="tag">Novidade</span>{% elif product.is_bestseller %}<span class="tag">Mais vendido</span>{% endif %}
+</a>

@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load catalog_extras %}
+
+{% block title %}{{ product.display_title }}{% endblock %}
+{% block meta_description %}{{ product.display_meta_description }}{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.name|escapejs }}",
+  "description": "{{ product.short_description|escapejs }}",
+  {% if product.main_image %}"image": "{{ product.main_image.url }}",{% endif %}
+  "brand": { "@type": "Brand", "name": "{{ product.brand.name|escapejs }}" },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "BRL",
+    "price": "{% if product.is_on_promotion %}{{ product.promotional_price|stringformat:'0.2f' }}{% else %}{{ product.price|stringformat:'0.2f' }}{% endif %}",
+    "availability": "https://schema.org/InStock",
+    "url": "https://{{ request.get_host }}{{ request.path }}"
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumbs">
+      <a href="{% url 'home' %}">Início</a><span>/</span>
+      <a href="{% url 'catalog:catalog_list' %}">Catálogo</a><span>/</span>
+      <a href="{% url 'catalog:catalog_list' %}?categoria={{ product.category.slug }}">{{ product.category.name }}</a><span>/</span>
+      {{ product.name }}
+    </div>
+  </div>
+</section>
+
+<section class="product-page">
+  <div class="wrap product-detail-grid">
+    <div class="reveal in">
+      {% if product.main_image %}
+      <div class="gallery-main"><img src="{{ product.main_image.url }}" alt="{{ product.name }}"></div>
+      {% else %}
+      <div class="gallery-main product-media" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(150deg, hsl({{ product.id|placeholder_hue }} 18% 12%), #0a0a0a 70%);">
+        <span class="monogram">{{ product.name|initials }}</span>
+        <div class="overlay"></div>
+      </div>
+      {% endif %}
+      {% if product.gallery.all %}
+      <div class="gallery-thumbs">
+        {% if product.main_image %}<img src="{{ product.main_image.url }}" data-full="{{ product.main_image.url }}" alt="{{ product.name }}">{% endif %}
+        {% for img in product.gallery.all %}
+        <img src="{{ img.image.url }}" data-full="{{ img.image.url }}" alt="{{ img.alt_text|default:product.name }}">
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="reveal in">
+      <div class="pd-brand">{{ product.brand.name }}</div>
+      <h1 class="pd-title">{{ product.name }}</h1>
+      {% if product.is_on_promotion %}
+      <div class="pd-price price-promo">
+        <span class="price-old">{{ product.price|brl }}</span>
+        <span class="price-new">{{ product.promotional_price|brl }}</span>
+      </div>
+      <div class="pd-badge-promo">Promoção <span class="pct">-{{ product.discount_percent }}%</span></div>
+      {% else %}
+      <div class="pd-price">{{ product.price|brl }}</div>
+      {% endif %}
+      {% if product.has_installments %}
+      <div class="pd-installments">Em até {{ product.max_installments }}x {{ product.installment_value|brl }} sem juros</div>
+      {% endif %}
+      <div class="pd-desc">{{ product.full_description|default:product.short_description|linebreaks }}</div>
+      {% if product.available_sizes %}
+      <div class="pd-sizes"><span class="pd-sizes-label">Tamanhos disponíveis:</span> {{ product.available_sizes }}</div>
+      {% endif %}
+      <div class="pd-actions">
+        <a href="{% whatsapp_link product.name product=product %}" target="_blank" rel="noopener" class="btn btn-gold">Tenho Interesse — Falar no WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  {% if related_products %}
+  <div class="wrap">
+    <h2 class="related-title">Você também pode gostar</h2>
+    <div class="product-grid">
+      {% for rp in related_products %}
+      <div class="product-card">
+        {% include "catalog/_product_media.html" with product=rp %}
+        <div class="product-info">
+          <div class="brand">{{ rp.brand.name }}</div>
+          <h3><a href="{{ rp.get_absolute_url }}">{{ rp.name }}</a></h3>
+          <div class="row">
+            {% if rp.is_on_promotion %}
+            <div class="price price-promo">
+              <span class="price-old">{{ rp.price|brl }}</span>
+              <span class="price-new">{{ rp.promotional_price|brl }}</span>
+            </div>
+            {% else %}
+            <div class="price">{{ rp.price|brl }}</div>
+            {% endif %}
+            <a class="interest-btn" href="{% whatsapp_link rp.name product=rp %}" target="_blank" rel="noopener">Tenho Interesse</a>
+          </div>
+          {% if rp.has_installments %}
+          <div class="card-installments">Em até {{ rp.max_installments }}x {{ rp.installment_value|brl }} sem juros</div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

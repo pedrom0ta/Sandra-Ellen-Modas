@@ -1,0 +1,19 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'admin/css/custom_admin.css' %}">
+{% endblock %}
+
+{% block branding %}
+<div id="site-name">
+  <a href="{% url 'admin:index' %}" style="display:flex;align-items:center;gap:10px;">
+    <img src="{% static 'img/logo.jpg' %}" alt="Sandra Ellen Modas" style="width:26px;height:26px;flex:0 0 auto;border-radius:50%;object-fit:cover;">
+    <span>Sandra Ellen <span style="color:#D4AF37;">Modas</span> · Painel</span>
+  </a>
+</div>
+{% endblock %}

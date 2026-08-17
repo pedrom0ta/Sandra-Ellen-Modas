@@ -1,0 +1,46 @@
+<div class="cookie-banner" id="cookieBanner" style="display:none;">
+  <p>
+    Usamos cookies para melhorar sua experiência e, com seu consentimento, para análise de audiência (Google Analytics)
+    e marketing (Meta Pixel). Veja nossa <a href="{% url 'pages:cookies' %}">Política de Cookies</a>.
+  </p>
+  <div class="actions">
+    <button class="cookie-reject" id="cookieReject">Recusar</button>
+    <button class="cookie-accept" id="cookieAccept">Aceitar</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KEY = 'se_cookie_consent';
+  var banner = document.getElementById('cookieBanner');
+  var stored = localStorage.getItem(KEY);
+
+  function loadAnalytics(){
+    if (!window.__gaId) return;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.__gaId;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', window.__gaId);
+  }
+
+  if (!stored) {
+    banner.style.display = 'flex';
+  } else if (stored === 'accepted') {
+    loadAnalytics();
+  }
+
+  document.getElementById('cookieAccept').addEventListener('click', function(){
+    localStorage.setItem(KEY, 'accepted');
+    banner.style.display = 'none';
+    loadAnalytics();
+  });
+  document.getElementById('cookieReject').addEventListener('click', function(){
+    localStorage.setItem(KEY, 'rejected');
+    banner.style.display = 'none';
+  });
+})();
+</script>
