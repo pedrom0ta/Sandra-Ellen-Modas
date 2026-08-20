@@ -1,12 +1,18 @@
 .env
 *.pyc
 __pycache__/
-db.sqlite3
 /staticfiles/
-/media/
 /logs/*.log
 /backups/
 .DS_Store
-*.sqlite3
 venv/
 .venv/
+
+# NOTA (demonstração Vercel): db.sqlite3 e /media/ propositalmente NÃO estão
+# mais ignorados aqui, para que o banco já cadastrado e as imagens dos
+# produtos sejam versionados no Git e publicados junto com o deploy da
+# Vercel (ambiente serverless, sem volume persistente). Assim que o site
+# sair do modo demonstração, restaure essas duas linhas:
+#   db.sqlite3
+#   *.sqlite3
+#   /media/

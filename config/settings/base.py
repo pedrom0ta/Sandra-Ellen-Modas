@@ -107,6 +107,15 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# ---------------------------------------------------------------------------
+# Serve /media/ diretamente pelo Django mesmo com DEBUG=False.
+# Necessário em ambientes serverless (Vercel) onde não existe um Nginx na
+# frente do Django para servir os arquivos de mídia estaticamente. Em
+# produção "tradicional" (Hostinger/Nginx, ver prod.py) isso continua
+# desligado por padrão, pois o Nginx já cuida disso (ver nginx/nginx.conf).
+# ---------------------------------------------------------------------------
+SERVE_MEDIA = config("SERVE_MEDIA", default=False, cast=bool)
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ---------------------------------------------------------------------------
