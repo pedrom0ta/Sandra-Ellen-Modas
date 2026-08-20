@@ -11,12 +11,10 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-# Na Vercel, a variável de sistema VERCEL=1 é injetada automaticamente
-# tanto no build quanto em runtime. Localmente (sem essa variável),
-# continua usando as settings de desenvolvimento como antes.
-os.environ.setdefault(
-    'DJANGO_SETTINGS_MODULE',
-    'config.settings.vercel' if os.environ.get('VERCEL') else 'config.settings.dev',
-)
+# Padrão para desenvolvimento local. Na Vercel, cadastre a Environment
+# Variable DJANGO_SETTINGS_MODULE=config.settings.vercel no painel do
+# projeto — setdefault() só age quando a variável ainda não existe, então
+# o valor da Vercel tem prioridade automaticamente (ver manage.py).
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.dev')
 
 application = get_wsgi_application()

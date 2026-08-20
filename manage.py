@@ -6,13 +6,14 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    # Na Vercel, a variável de sistema VERCEL=1 é injetada automaticamente
-    # tanto no build quanto em runtime. Localmente (sem essa variável),
-    # continua usando as settings de desenvolvimento como antes.
-    os.environ.setdefault(
-        'DJANGO_SETTINGS_MODULE',
-        'config.settings.vercel' if os.environ.get('VERCEL') else 'config.settings.dev',
-    )
+    # Padrão para desenvolvimento local. Na Vercel, cadastre a Environment
+    # Variable DJANGO_SETTINGS_MODULE=config.settings.vercel no painel do
+    # projeto — como setdefault() só age quando a variável ainda não existe,
+    # o valor da Vercel tem prioridade automaticamente sem precisar mexer
+    # neste arquivo. (Não usamos um valor condicional aqui porque o
+    # mecanismo da Vercel que lê este arquivo para descobrir o
+    # DJANGO_SETTINGS_MODULE espera uma string literal simples.)
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.dev')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
